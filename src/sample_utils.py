@@ -48,7 +48,7 @@ def get_root_ca_cert(cert_path):
         with open(cert_path, "r") as file:
             return file.read()
     except:
-        console_output("Could not find CA Root certificate in src/ folder of project. Exiting...")
+        console_output("Could not find CA Root certificate. Exiting...")
         raise
 
 

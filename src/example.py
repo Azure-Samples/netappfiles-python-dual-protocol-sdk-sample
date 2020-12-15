@@ -35,7 +35,7 @@ DNS_LIST = "10.25.4.68" # Please notice that this is a comma-separated string
 AD_FQDN = "testdomain.local"
 SMB_SERVERNAME_PREFIX = "testsmb" # this needs to be maximum 10 characters in length and during the domain join process a random string gets appended.
 
-ROOT_CA_CERT_FULL_FILEPATH = "ad-server.cer" # Base64 encoded root ca certificate full file name, located in src folder
+ROOT_CA_CERT_FULL_FILEPATH = "./ad-server.cer" # Base64 encoded root ca certificate full file name
 
 # Change this to 'True' to enable cleanup process
 CLEANUP_RESOURCES = False
@@ -187,6 +187,7 @@ def run_example():
 
     # Fetching root CA cert for dual-protocol use
     cert_content = get_root_ca_cert(ROOT_CA_CERT_FULL_FILEPATH)
+    console_output("Encoding certificate contents as base64 string...")
     encoded_cert_content = base64.b64encode(cert_content.encode())
 
     console_output("Creating ANF Resources...")

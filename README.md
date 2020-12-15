@@ -10,7 +10,7 @@ description: "This project demonstrates how to create a Dual-Protocol Volume for
 
 # Azure NetAppFiles Dual-Protocol SDK Sample for Python
 
-This project demonstrates how to use a Python sample application to create a Dual-Protocol Volume (a Volume that uses both SMB/NFS protocol types) for the Microsoft.NetApp resource provider.
+This project demonstrates how to use a Python sample application to create a Dual-Protocol Volume (a Volume that uses both SMB/NFSv3 protocol types) for the Microsoft.NetApp resource provider.
 
 In this sample application we perform the following operations:
 
@@ -31,7 +31,6 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 2. Make sure you comply with the dual-protocol items described [here](https://docs.microsoft.com/en-us/azure/azure-netapp-files/create-volumes-dual-protocol#considerations) before you proceed.
 3. Have the Root CA certificate used by the AD Domain Controller and the Windows clients exported as Base64 encoded X.509 certificate file.
 If unsure, steps 2-3 in [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/create-volumes-dual-protocol#upload-active-directory-certificate-authority-public-root-certificate) document shows how to export the certificate.
-Make sure this file is stored in the src/ folder of the project.
 4. Azure Subscription
 5. Subscription needs to be enabled for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
 6. Resource Group created
@@ -72,7 +71,7 @@ Make sure this file is stored in the src/ folder of the project.
 
 # What is example.py doing? 
 
-This sample is dedicated to demonstrate how to create a dual-protocol Volume using an ANF Account name in Azure NetApp Files. Dual-protocol volumes use both SMB and NFS protocol types.
+This sample is dedicated to demonstrate how to create a dual-protocol Volume using an ANF Account name in Azure NetApp Files. Dual-protocol volumes use both SMB and NFSv3 protocol types.
 Similar to other ANF SDK examples, the authentication method is based on a service principal. This project will first create an ANF Account with an Active Directory object using the Root CA certificate mentioned in the prerequisites section.
 Then a capacity pool is created, and finally a single dual-protocol volume using Standard service level tier. The protocol types of the Volume will then be printed out to showcase the inclusion of both.
 When executing this application, the user will be prompted to provide the password for the Active Directory User that has permission to domain join computers in AD.
@@ -122,5 +121,7 @@ Sample output
 - [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
 - [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart)
 - [Azure NetApp Files documentation](https://docs.microsoft.com/en-us/azure/azure-netapp-files/)
-- [Download Azure SDKs](https://azure.microsoft.com/downloads/) 
+- [Download Azure SDKs](https://azure.microsoft.com/downloads/)
+- [Create dual-protocol volumes](https://docs.microsoft.com/en-us/azure/azure-netapp-files/create-volumes-dual-protocol)
+- [Troubleshoot dual-protocol volumes](https://docs.microsoft.com/en-us/azure/azure-netapp-files/troubleshoot-dual-protocol-volumes)
  
