@@ -27,15 +27,13 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 
 ## Prerequisites
 
-1. Python (code was built and tested using version 3.8.5)
+1. Python (code was built and tested using version 3.9.5)
 2. Make sure you comply with the dual-protocol items described [here](https://docs.microsoft.com/en-us/azure/azure-netapp-files/create-volumes-dual-protocol#considerations) before you proceed.
-3. Have the Root CA certificate used by the AD Domain Controller and the Windows clients exported as Base64 encoded X.509 certificate file. 
-If unsure, steps 2-3 in [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/create-volumes-dual-protocol#upload-active-directory-certificate-authority-public-root-certificate) document shows how to export the certificate.
-4. Azure Subscription.
-5. Subscription needs to be enabled for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
-6. Resource Group created
-7. Virtual Network with a delegated subnet to Microsoft.Netapp/volumes resource. For more information, please refer to [Guidelines for Azure NetApp Files network planning](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-network-topologies)
-8. For this sample Python console application to work we need to authenticate, and the chosen method for this sample is using service principals.
+3. Azure Subscription.
+4. Subscription needs to be enabled for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
+5. Resource Group created
+6. Virtual Network with a delegated subnet to Microsoft.Netapp/volumes resource. For more information, please refer to [Guidelines for Azure NetApp Files network planning](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-network-topologies)
+7. For this sample Python console application to work we need to authenticate, and the chosen method for this sample is using service principals.
    1. Within an [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart) session, make sure you're logged on at the subscription where you want to be associated with the service principal by default:
         ```bash
         az account show
@@ -68,11 +66,12 @@ If unsure, steps 2-3 in [this](https://docs.microsoft.com/en-us/azure/azure-neta
         export AZURE_AUTH_LOCATION=/sdksamples/azureauth.json
         ```
         >Note: for other Azure Active Directory authentication methods for Python, please refer to these [samples](https://github.com/AzureAD/microsoft-authentication-library-for-python/tree/dev/sample). 
+8. Active Directory infrastructure setup with one or more DNS servers from the AD domain (usually the Domain Controllers) available in the **same virtual network** where you're setting up Azure NetApp Files. If you want to setup an Active Directory test environment, please refer to [Create a new Windows VM and create a new AD Forest, Domain and DC](https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/active-directory/active-directory-new-domain) for a quick setup, then you can create the subnet delegated to Microsoft.Netapp/volumes in the vnet that is created.
 
 # What is example.py doing? 
 
 This sample is dedicated to demonstrate how to create a dual-protocol Volume using an ANF Account name in Azure NetApp Files. Dual-protocol volumes use both SMB and NFSv3 protocol types.
-Similar to other ANF SDK examples, the authentication method is based on a service principal. This project will first create an ANF Account with an Active Directory object using the Root CA certificate mentioned in the prerequisites section.
+Similar to other ANF SDK examples, the authentication method is based on a service principal. This project will first create an ANF Account with an Active Directory object.
 Then a capacity pool is created, and finally a single dual-protocol volume using Standard service level tier. The protocol types of the Volume will then be printed out to showcase the inclusion of both.
 When executing this application, the user will be prompted to provide the password for the Active Directory User that has permission to domain join computers in AD.
 
@@ -112,7 +111,7 @@ Finally, all created resources will be deleted via the cleanup process (as long 
     ```
 
 Sample output
-![e2e execution](./media/e2e-pythoncrr.png)
+![e2e execution](./media/e2e-execution.png)
 
 # References
 
